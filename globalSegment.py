@@ -18,6 +18,12 @@ def strHasOnlyLetters(text: str) -> bool:
             return False
     return True
 
+def strIsInt(text: str) -> bool:
+    if text.isdigit():
+        return True
+    print("Ошибка: число содержить посторонние символы.")
+    return False
+        
 def dateTimeValidate(durationTime) -> bool:
     if re.match("\\d{2}:\\d{2}-\\d{2}:\\d{2}", durationTime) or durationTime == '0':
         return True

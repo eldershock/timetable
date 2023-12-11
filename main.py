@@ -1,7 +1,7 @@
 import os
 from teacher import Teacher
 from studentGroup import StudentGroup
-from globalSegment import dateTimeValidate, clear, strHasOnlyLetters, studentsWorkDaysTime
+from globalSegment import dateTimeValidate, clear, strHasOnlyLetters, studentsWorkDaysTime, strIsInt
 
 # functions
 def mainMenu():
@@ -15,10 +15,15 @@ def mainMenu():
     # print("5 - выход")
 
 def studentsWorkDaysTimeEnter():
-    maxCountOfLessons = int(input("Введите максимальное кол-во уроков в смене: "))
-    for i in range(1, maxCountOfLessons+1):
+    maxCountOfLessons = str(input("Введите максимальное кол-во уроков в смене: "))
+    while True:
+        if strIsInt(maxCountOfLessons):
+            break
+        else:
+            maxCountOfLessons = str(input())
+    for i in range(int(maxCountOfLessons)):
         while True:
-            subjectTime = str(input(f"Введите длительность {i} урока (форма ввода: XX:XX-XX:XX), если же урока нет, то введите 0: "))
+            subjectTime = str(input(f"Введите длительность {i+1} урока (форма ввода: XX:XX-XX:XX), если же урока нет, то введите 0: "))
             if dateTimeValidate(subjectTime):
                 break
         studentsWorkDaysTime.append(subjectTime)
@@ -64,7 +69,7 @@ def inputStudentGroup(studentGroups: list):
                 groupName = str(input("Введите название класса: "))
                 groupCount = int(input("Введите кол-во учеников: "))
                 studentGroup = StudentGroup(groupName, groupCount)
-                # studentGroup.fillWorkDays()
+                studentGroup.fillWorkDays(studentsWorkDaysTime)
                 studentGroups.append(studentGroup)
             case 2:
                 break
@@ -86,6 +91,14 @@ def main():
                 studentsWorkDaysTimeEnter()
             case 4:
                 break
+            case 5:
+                for i in studentGroups:
+                    print(i.groupName)
+                    print(i.count)
+                    for j in i.workDays.keys():
+                        print(f"{j}: {i.workDays[j]}")
+                print(studentsWorkDaysTime)
+                os.system("pause")
             case 7:
                 for i in teacherList:
                     print(i.name)
