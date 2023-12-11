@@ -1,3 +1,6 @@
 .idea
 vvenv
 __pycache__
+__pycache__/teacher.cpython-311.pyc
+__pycache__/studentGroup.cpython-311.pyc
+__pycache__/globalSegment.cpython-311.pyc
