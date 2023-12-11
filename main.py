@@ -63,7 +63,7 @@ def inputStudentGroup(studentGroups: list):
                 groupName = str(input("Введите название класса: "))
                 groupCount = int(input("Введите кол-во учеников: "))
                 studentGroup = StudentGroup(groupName, groupCount)
-                studentGroup.fillWorkDays(studentsWorkDaysTime)
+                studentGroup.fillSubjects()
                 studentGroups.append(studentGroup)
             case 2:
                 break
@@ -102,11 +102,10 @@ def main():
                 # makeTimetable(teacherList, studentGroups)
                 break
             case 5:
-                for i in studentGroups:
-                    print(i.groupName)
-                    print(i.count)
-                    for j in i.workDays.keys():
-                        print(f"{j}: {i.workDays[j]}")
+                for studentGroup in studentGroups:
+                    print("Класс: ", studentGroup.groupName, "кол-во учеников: ", studentGroup.count)
+                    for subject in studentGroup.subjects.keys():
+                        print(f"{subject}: {studentGroup.subjects[subject]}")
                 print(f"Время уроков: {studentsWorkDaysTime}")
                 os.system("pause")
             case 7:
