@@ -10,23 +10,12 @@ def mainMenu():
     print("2 - ввести список классов")
     print("3 - заполнить время уроков")
     # print("3 - необходимые условия")
-    # print("4 - составить расписание (xlsx/txt)")
+    print("4 - составить расписание (xlsx/txt)")
     print("7 - ТЕСТ ФУНКЦИЯ")
     # print("5 - выход")
 
-def studentsWorkDaysTimeEnter():
-    maxCountOfLessons = str(input("Введите максимальное кол-во уроков в смене: "))
-    while True:
-        if strIsInt(maxCountOfLessons):
-            break
-        else:
-            maxCountOfLessons = str(input())
-    for i in range(int(maxCountOfLessons)):
-        while True:
-            subjectTime = str(input(f"Введите длительность {i+1} урока (форма ввода: XX:XX-XX:XX), если же урока нет, то введите 0: "))
-            if dateTimeValidate(subjectTime):
-                break
-        studentsWorkDaysTime.append(subjectTime)
+# def makeTimetable(teacherList: list(), studentGroups: list()):
+
 
 #teacher's segment
 def teachersMenu():
@@ -74,6 +63,19 @@ def inputStudentGroup(studentGroups: list):
             case 2:
                 break
 
+def studentsWorkDaysTimeEnter():
+    maxCountOfLessons = str(input("Введите максимальное кол-во уроков в смене: "))
+    while True:
+        if strIsInt(maxCountOfLessons):
+            break
+        else:
+            maxCountOfLessons = str(input())
+    for i in range(int(maxCountOfLessons)):
+        while True:
+            subjectTime = str(input(f"Введите длительность {i+1} урока (форма ввода: XX:XX-XX:XX), если же урока нет, то введите 0: "))
+            if dateTimeValidate(subjectTime):
+                break
+        studentsWorkDaysTime.append(subjectTime)
 
 def main():
     choice = 0
@@ -90,6 +92,7 @@ def main():
             case 3:
                 studentsWorkDaysTimeEnter()
             case 4:
+                makeTimetable(teacherList, studentGroups)
                 break
             case 5:
                 for i in studentGroups:

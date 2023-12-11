@@ -8,6 +8,7 @@ studentsWorkDaysTime = []
 def clear():
     return os.system("cls")
 
+#error checkers
 def strHasOnlyLetters(text: str) -> bool:
     for i in text:
         if i.isdigit():

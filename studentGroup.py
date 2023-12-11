@@ -17,7 +17,7 @@ class StudentGroup:
     def fillWorkDays(self, studentsWorkDaysTime: list()):
         for workDay in self.workDays.keys():
             lessons = []
-            for lesson in range(len(studentsWorkDaysTime)):
-                lesson = str(input("Введите урок: "))
+            for i in range(len(studentsWorkDaysTime)):
+                lesson = str(input(f"{workDay}, введите {i+1} урок: "))
                 lessons.append(lesson)
             self.workDays[workDay] = lessons
