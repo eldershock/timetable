@@ -78,8 +78,8 @@ def studentsWorkDaysTimeEnter():
             maxCountOfLessons = str(input())
     for i in range(int(maxCountOfLessons)):
         while True:
-            subjectTime = str(input(f"Введите длительность {i+1} урока (форма ввода: XX:XX-XX:XX), если же урока нет, то введите 0: "))
-            if dateTimeValidate(subjectTime):
+            subjectTime = str(input(f"Введите длительность {i+1} урока (форма ввода: XX:XX-XX:XX): "))
+            if dateTimeValidate(subjectTime, True):
                 break
         studentsWorkDaysTime.append(subjectTime)
 
@@ -107,7 +107,7 @@ def main():
                     print(i.count)
                     for j in i.workDays.keys():
                         print(f"{j}: {i.workDays[j]}")
-                print(studentsWorkDaysTime)
+                print(f"Время уроков: {studentsWorkDaysTime}")
                 os.system("pause")
             case 7:
                 for i in teacherList:

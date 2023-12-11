@@ -30,8 +30,8 @@ def strIsInt(text: str) -> bool:
     return False
 
 
-def dateTimeValidate(durationTime) -> bool:
-    if re.match("\\d{2}:\\d{2}-\\d{2}:\\d{2}", durationTime) or durationTime == '0':
+def dateTimeValidate(durationTime, isLessonsTime = False) -> bool:
+    if re.match("\\d{2}:\\d{2}-\\d{2}:\\d{2}", durationTime) or (durationTime == '0' and not isLessonsTime):
         return True
     else:
         print("Ошибка: введите данные согласно форме.")
