@@ -99,7 +99,7 @@ def main():
             case 3:
                 studentsWorkDaysTimeEnter()
             case 4:
-                makeTimetable(teacherList, studentGroups)
+                # makeTimetable(teacherList, studentGroups)
                 break
             case 5:
                 for i in studentGroups:
