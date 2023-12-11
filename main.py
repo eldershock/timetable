@@ -3,6 +3,7 @@ from teacher import Teacher
 from studentGroup import StudentGroup
 from globalSegment import dateTimeValidate, clear, strHasOnlyLetters, studentsWorkDaysTime, strIsInt
 
+
 # functions
 def mainMenu():
     clear()
@@ -22,6 +23,7 @@ def teachersMenu():
     clear()
     print("1 - ввести учителя")
     print("2 - вернуться назад")
+
 
 def inputTeacherList(teacherList: list):
     while True:
@@ -92,7 +94,7 @@ def main():
             case 3:
                 studentsWorkDaysTimeEnter()
             case 4:
-                makeTimetable(teacherList, studentGroups)
+                # makeTimetable(teacherList, studentGroups)
                 break
             case 5:
                 for i in studentGroups:
