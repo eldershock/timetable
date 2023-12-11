@@ -5,6 +5,7 @@ class Teacher:
     name = ""
     subject = ""
 
+
     def __init__(self, name, subject):
         self.name = name
         self.subject = subject
@@ -15,6 +16,7 @@ class Teacher:
                 "Пятница": ["", ""],
                 "Суббота": ["", ""]
                 }
+
 
     def fillWorkDays(self):
         for workDay in self.workDays.keys():
@@ -29,4 +31,3 @@ class Teacher:
                 self.workDays[workDay][1] = workTime.split('-')[1]
                 print(workTime.split('-')[1])
             print(self.workDays[workDay])
-
