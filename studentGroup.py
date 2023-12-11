@@ -2,7 +2,8 @@ class StudentGroup:
     groupName = ""
     count = 0
     workDays = {}
-    
+
+
     def __init__(self, groupName, count):
         self.groupName = groupName
         self.count = count
@@ -13,7 +14,8 @@ class StudentGroup:
                 "Пятница": [],
                 "Суббота": []
                 }
-        
+
+     
     def fillWorkDays(self, studentsWorkDaysTime: list()):
         for workDay in self.workDays.keys():
             lessons = []

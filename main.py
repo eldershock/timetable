@@ -15,6 +15,7 @@ def mainMenu():
     print("7 - ТЕСТ ФУНКЦИЯ")
     # print("5 - выход")
 
+
 # def makeTimetable(teacherList: list(), studentGroups: list()):
 
 
@@ -45,11 +46,13 @@ def inputTeacherList(teacherList: list):
             case 2:
                 break
 
+
 #student's segment
 def studentGroupMenu():
     clear()
     print("1 - ввести группу")
     print("2 - вернуться назад")
+
 
 def inputStudentGroup(studentGroups: list):
     while True:
@@ -65,6 +68,7 @@ def inputStudentGroup(studentGroups: list):
             case 2:
                 break
 
+
 def studentsWorkDaysTimeEnter():
     maxCountOfLessons = str(input("Введите максимальное кол-во уроков в смене: "))
     while True:
@@ -78,6 +82,7 @@ def studentsWorkDaysTimeEnter():
             if dateTimeValidate(subjectTime):
                 break
         studentsWorkDaysTime.append(subjectTime)
+
 
 def main():
     choice = 0
