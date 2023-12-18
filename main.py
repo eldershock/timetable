@@ -1,7 +1,8 @@
 import os
+import random
 from teacher import Teacher
 from studentGroup import StudentGroup
-from globalSegment import dateTimeValidate, clear, strHasOnlyLetters, studentsWorkDaysTime, strIsInt
+from globalSegment import dateTimeValidate, clear, strHasOnlyLetters, studentsWorkDaysTime, strIsInt, workDaysConst
 
 
 # functions
@@ -15,9 +16,53 @@ def mainMenu():
     print("7 - ТЕСТ ФУНКЦИЯ")
     # print("5 - выход")
 
+def makeTimetable(teacherList: list(), studentGroups: list()):
+    timetable = {}
+    usedTeachers = []
+    usedSubjects = {}
+    hours = 0
+    for studentGroup in studentGroups:
+        groupTimetable = {}
+        for time in studentsWorkDaysTime:
+            for day in workDaysConst:
+                subject = random.choice(list(studentGroup.subjects.keys()))
+                # while hours == 0:
+                #     subject = random.choice(list(studentGroup.subjects.keys()))
+                #     hours = studentGroup.subjects[subject]
+                #     subjectPerDay = hours / len(workDaysConst)
+                
+                available_teachers = [teacher for teacher in teacherList if teacher.subject == subject]
+                if not available_teachers:
+                    print(f"Ошибка: Нет доступных учителей для предмета {subject} в группе {studentGroup.groupName}.")
+                    return
+                
+                teacher = random.choice(available_teachers)
 
-# def makeTimetable(teacherList: list(), studentGroups: list()):
+                if day not in groupTimetable:
+                    groupTimetable[day] = []
+                
+                groupTimetable[day].append({
+                    'subject': subject,
+                    'teacher': teacher.name,
+                    'time': time
+                })
 
+                # usedSubjects[subject] = hours
+                # hours -= subjectPerDay
+
+        timetable[studentGroup.groupName] = groupTimetable
+        
+    # Вывод расписания
+    for group, group_timetable in timetable.items():
+        print(f"\nРасписание для группы {group}:\n")
+        for day, lessons in group_timetable.items():
+            print(f"{day}:")
+            for lesson in lessons:
+                print(f"    Предмет: {lesson['subject']}")
+                print(f"    Учитель: {lesson['teacher']}")
+                print(f"    Время: {lesson['time']}")
+                print()
+    
 
 #teacher's segment
 def teachersMenu():
@@ -85,9 +130,29 @@ def studentsWorkDaysTimeEnter():
 
 
 def main():
+    teacher1 = Teacher("Иванов", "Математика", {"Понедельник": ["07:00", "19:00"], "Вторник": ["07:00", "19:00"], "Среда": ["07:00", "19:00"], "Четверг": ["07:00", "19:00"], "Пятница": ["07:00", "19:00"], "Суббота": ["07:00", "19:00"]})
+    teacher2 = Teacher("Петров", "Физика", {"Понедельник": ["07:00", "19:00"], "Вторник": ["07:00", "19:00"], "Среда": ["07:00", "19:00"], "Четверг": ["07:00", "19:00"], "Пятница": ["07:00", "19:00"], "Суббота": ["07:00", "19:00"]})
+    teacher3 = Teacher("Куренков", "История", {"Понедельник": ["07:00", "19:00"], "Вторник": ["07:00", "19:00"], "Среда": ["07:00", "19:00"], "Четверг": ["07:00", "19:00"], "Пятница": ["07:00", "19:00"], "Суббота": ["07:00", "19:00"]})
+    teacher4 = Teacher("Владимир", "Химия", {"Понедельник": ["07:00", "19:00"], "Вторник": ["07:00", "19:00"], "Среда": ["07:00", "19:00"], "Четверг": ["07:00", "19:00"], "Пятница": ["07:00", "19:00"], "Суббота": ["07:00", "19:00"]})
+    teacher5 = Teacher("Влад", "Геометрия", {"Понедельник": ["07:00", "19:00"], "Вторник": ["07:00", "19:00"], "Среда": ["07:00", "19:00"], "Четверг": ["07:00", "19:00"], "Пятница": ["07:00", "19:00"], "Суббота": ["07:00", "19:00"]})
+    teacher6 = Teacher("Билборды", "залупа", {"Понедельник": ["07:00", "19:00"], "Вторник": ["07:00", "19:00"], "Среда": ["07:00", "19:00"], "Четверг": ["07:00", "19:00"], "Пятница": ["07:00", "19:00"], "Суббота": ["07:00", "19:00"]})
+    teacher7 = Teacher("Бустер", "Матанализ", {"Понедельник": ["07:00", "19:00"], "Вторник": ["07:00", "19:00"], "Среда": ["07:00", "19:00"], "Четверг": ["07:00", "19:00"], "Пятница": ["07:00", "19:00"], "Суббота": ["07:00", "19:00"]})
+    teacher8 = Teacher("Кола", "хуйня", {"Понедельник": ["07:00", "19:00"], "Вторник": ["07:00", "19:00"], "Среда": ["07:00", "19:00"], "Четверг": ["07:00", "19:00"], "Пятница": ["07:00", "19:00"], "Суббота": ["07:00", "19:00"]})
+    group1 = StudentGroup("Группа 1", {"Математика": 10, "Физика": 5, "История": 10, "Химия": 15, "Геометрия" : 16, "Матанализ" : 25}, 14)
+    group2 = StudentGroup("Группа 2", {"Математика": 14, "Физика": 5, "История": 10, "хуйня": 10, "залупа" : 4}, 15)
     choice = 0
     teacherList = list()
+    teacherList.append(teacher1)
+    teacherList.append(teacher2)
+    teacherList.append(teacher3)
+    teacherList.append(teacher4)
+    teacherList.append(teacher5)
+    teacherList.append(teacher6)
+    teacherList.append(teacher7)
+    teacherList.append(teacher8)
     studentGroups = list()
+    studentGroups.append(group1)
+    studentGroups.append(group2)
     while True:
         mainMenu()
         choice = int(input("Выберите действие: "))
@@ -99,7 +164,7 @@ def main():
             case 3:
                 studentsWorkDaysTimeEnter()
             case 4:
-                # makeTimetable(teacherList, studentGroups)
+                makeTimetable(teacherList, studentGroups)
                 break
             case 5:
                 for studentGroup in studentGroups:

@@ -2,10 +2,9 @@ import string
 import re
 import os
 
-
 symbols = string.punctuation
-studentsWorkDaysTime = []
-
+studentsWorkDaysTime = ["08:00-08:40", "08:50-09:30", "09:40-10:20", "10:25-11:45", "11:50-12:30", "12:40-13:10"]
+workDaysConst = ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"]
 
 def clear():
     return os.system("cls")

@@ -6,16 +6,17 @@ class Teacher:
     subject = ""
 
 
-    def __init__(self, name, subject):
+    def __init__(self, name, subject, workDays):
         self.name = name
         self.subject = subject
-        self.workDays = {"Понедельник": ["", ""],
-                "Вторник": ["", ""],
-                "Среда": ["", ""],
-                "Четверг": ["", ""],
-                "Пятница": ["", ""],
-                "Суббота": ["", ""]
-                }
+        self.workDays = workDays
+        # self.workDays = {"Понедельник": ["", ""],
+        #         "Вторник": ["", ""],
+        #         "Среда": ["", ""],
+        #         "Четверг": ["", ""],
+        #         "Пятница": ["", ""],
+        #         "Суббота": ["", ""]
+        #         }
 
 
     def fillWorkDays(self):
