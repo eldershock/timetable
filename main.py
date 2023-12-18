@@ -25,12 +25,13 @@ def makeTimetable(teacherList: list(), studentGroups: list()):
         groupTimetable = {}
         for time in studentsWorkDaysTime:
             for day in workDaysConst:
-                subject = random.choice(list(studentGroup.subjects.keys()))
-                # while hours == 0:
-                #     subject = random.choice(list(studentGroup.subjects.keys()))
-                #     hours = studentGroup.subjects[subject]
-                #     subjectPerDay = hours / len(workDaysConst)
-                
+                while hours <= 0:
+                    subject = random.choice(list(studentGroup.subjects.keys()))
+                    if usedSubjects[subject]
+                    hours = studentGroup.subjects[subject]
+                    subjectPerDay = hours / len(workDaysConst)
+                    break
+                    
                 available_teachers = [teacher for teacher in teacherList if teacher.subject == subject]
                 if not available_teachers:
                     print(f"Ошибка: Нет доступных учителей для предмета {subject} в группе {studentGroup.groupName}.")
@@ -47,8 +48,8 @@ def makeTimetable(teacherList: list(), studentGroups: list()):
                     'time': time
                 })
 
-                # usedSubjects[subject] = hours
-                # hours -= subjectPerDay
+                usedSubjects[subject] = hours
+                hours -= subjectPerDay
 
         timetable[studentGroup.groupName] = groupTimetable
         
@@ -138,8 +139,8 @@ def main():
     teacher6 = Teacher("Билборды", "залупа", {"Понедельник": ["07:00", "19:00"], "Вторник": ["07:00", "19:00"], "Среда": ["07:00", "19:00"], "Четверг": ["07:00", "19:00"], "Пятница": ["07:00", "19:00"], "Суббота": ["07:00", "19:00"]})
     teacher7 = Teacher("Бустер", "Матанализ", {"Понедельник": ["07:00", "19:00"], "Вторник": ["07:00", "19:00"], "Среда": ["07:00", "19:00"], "Четверг": ["07:00", "19:00"], "Пятница": ["07:00", "19:00"], "Суббота": ["07:00", "19:00"]})
     teacher8 = Teacher("Кола", "хуйня", {"Понедельник": ["07:00", "19:00"], "Вторник": ["07:00", "19:00"], "Среда": ["07:00", "19:00"], "Четверг": ["07:00", "19:00"], "Пятница": ["07:00", "19:00"], "Суббота": ["07:00", "19:00"]})
-    group1 = StudentGroup("Группа 1", {"Математика": 10, "Физика": 5, "История": 10, "Химия": 15, "Геометрия" : 16, "Матанализ" : 25}, 14)
-    group2 = StudentGroup("Группа 2", {"Математика": 14, "Физика": 5, "История": 10, "хуйня": 10, "залупа" : 4}, 15)
+    group1 = StudentGroup("Группа 1", {"Математика": 10, "Физика": 5, "История": 10, "Химия": 15, "Геометрия" : 16, "Матанализ" : 10}, 14)
+    group2 = StudentGroup("Группа 2", {"Математика": 7, "Физика": 5, "История": 10, "хуйня": 10, "залупа" : 4}, 15)
     choice = 0
     teacherList = list()
     teacherList.append(teacher1)
