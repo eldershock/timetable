@@ -16,28 +16,46 @@ def mainMenu():
     print("7 - ТЕСТ ФУНКЦИЯ")
     # print("5 - выход")
 
+
 def makeTimetable(teacherList: list(), studentGroups: list()):
     timetable = {}
-    usedTeachers = []
+    # usedTeachers = []
     usedSubjects = {}
-    hours = 0
     for studentGroup in studentGroups:
         groupTimetable = {}
-        for time in studentsWorkDaysTime:
-            for day in workDaysConst:
-                while hours <= 0:
-                    subject = random.choice(list(studentGroup.subjects.keys()))
-                    if usedSubjects[subject]
+        for day in workDaysConst:
+            daySubjects = []
+            subject = ""
+            subjectPerDay = 0
+            exit = False
+            for time in studentsWorkDaysTime:
+                if subject in usedSubjects and usedSubjects[subject] == 0:
+                    usedSubjects.pop(subject)
+
+                if subjectPerDay <= 0:
+                    while True:
+                        if subject not in daySubjects and subject != "":
+                            daySubjects.append(subject)
+                            print(subject)
+                            break
+                        if len(daySubjects) == len(list(studentGroup.subjects.keys())):
+                            exit = True
+                            break
+                        subject = random.choice(list(studentGroup.subjects.keys()))
+                    if exit:
+                        break
+                    # subject = random.choice(list(studentGroup.subjects.keys()))
+                    usedSubjects[subject] = studentGroup.subjects[subject]
                     hours = studentGroup.subjects[subject]
-                    subjectPerDay = hours / len(workDaysConst)
-                    break
+                    subjectPerDay = int(hours // len(workDaysConst))
+
+                availableTeachers = [teacher for teacher in teacherList if teacher.subject == subject]
                     
-                available_teachers = [teacher for teacher in teacherList if teacher.subject == subject]
-                if not available_teachers:
+                if not availableTeachers:
                     print(f"Ошибка: Нет доступных учителей для предмета {subject} в группе {studentGroup.groupName}.")
                     return
                 
-                teacher = random.choice(available_teachers)
+                teacher = random.choice(availableTeachers)
 
                 if day not in groupTimetable:
                     groupTimetable[day] = []
@@ -48,15 +66,14 @@ def makeTimetable(teacherList: list(), studentGroups: list()):
                     'time': time
                 })
 
-                usedSubjects[subject] = hours
-                hours -= subjectPerDay
-
+                subjectPerDay -= 1
+                usedSubjects[subject] -= 1
         timetable[studentGroup.groupName] = groupTimetable
-        
+
     # Вывод расписания
-    for group, group_timetable in timetable.items():
+    for group, groupTimetable in timetable.items():
         print(f"\nРасписание для группы {group}:\n")
-        for day, lessons in group_timetable.items():
+        for day, lessons in groupTimetable.items():
             print(f"{day}:")
             for lesson in lessons:
                 print(f"    Предмет: {lesson['subject']}")
